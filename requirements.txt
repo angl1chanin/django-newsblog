@@ -1,0 +1,7 @@
+asgiref==3.6.0
+Django==4.1.4
+django-ckeditor==6.5.1
+django-js-asset==2.0.0
+Pillow==9.3.0
+pip-autoremove==0.10.0
+sqlparse==0.4.3

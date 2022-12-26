@@ -1,0 +1,7 @@
+.profile {
+  @media screen and (max-width: 768px) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

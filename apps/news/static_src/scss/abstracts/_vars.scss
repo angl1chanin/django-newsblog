@@ -1,0 +1,47 @@
+:root {
+  // common
+  --font-size-baze: 10px;
+  --body-fz: 1.6rem;
+  --base-color: #B3B3B3;
+  --bg-color: #F5F5F5;
+  --border-width: 0.2rem;
+  --border: 1px solid var(--btn-border-color);
+  --title-color: #666666;
+  --b-rad: 1rem;
+
+  // header
+  --header-bg-color: #fff;
+  --header-divider-color: #FAFAFA;
+  --header-text-color: #b3b3b3;
+
+  // categories
+  --categories-bg-color: #fff;
+  --categories-text-color: #b3b3b3;
+  --categories-text-hover: #797979;
+  --categories-text-active: #797979;
+  --categories-fz: 1.4rem;
+
+  // manage
+  --manage-border-color: #F0F0F0;
+  --manage-bg-color: #fff;
+  --manage-text-color: #808080;
+
+  // btn
+  --btn-border-color: #000;
+  --btn-text-color: #000;
+  --btn-hover-text-color: #fff;
+  --btn-padding: 1rem clamp(1rem, 0.673rem + 1.633vw, 2rem);
+
+  // grid-card
+  --grid-card-radius: 0.5rem;
+  --grid-card-title-fz: clamp(1.4rem, 1.327rem + 0.364vw, var(--body-fz));
+  --grid-card-subtitle-fz: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
+  --grid-card-author-fz: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
+  --grid-card-solid-text-color: #fff;
+  --grid-card-solid-author-text-color: #fff;
+  --grid-card-delimited-gray-text-color: #9A9A9A;
+  --grid-card-delimited-author-postdate-color: #CDCDCD;
+
+  // authors
+  --authors-card-bg: #fff;
+}

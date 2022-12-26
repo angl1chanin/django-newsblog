@@ -1,0 +1,27 @@
+/*
+ * Typography
+ * =================================
+ * - Base
+ * - Paragraphs
+ * - Headings
+ * - Type sizes
+ * - Misc
+ * - Utilities
+ *
+ * Body font size, leadings etc have been set in _variables.scss
+ *
+ *
+*/
+
+html {
+  font-size: var(--font-size-baze);
+}
+
+body {
+  // font-family: 'DM Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--body-fz);
+  font-weight: 300;
+  color: var(--base-color);
+  background-color: var(--bg-color);
+}

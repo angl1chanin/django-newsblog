@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+  <link rel="stylesheet" href="{% static 'accounts/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+{% endblock %}
+
+{% block title %} Login {% endblock %}
+
+{% block layouts %}{% endblock %}
+
+{% block body %}
+  <div class="main">
+    <section class="sign-in">
+      <div class="container">
+
+        <div class="signin-content">
+          <div class="signin-image">
+            <figure><img src="{% static 'accounts/images/signin-image.jpg' %}" alt="sing up image"></figure>
+            <a href="{% url 'accounts:signup' %}" class="signup-image-link">Create an account</a>
+          </div>
+
+          <div class="signin-form">
+            <h2 class="form-title">Sign in</h2>
+            {% if messages %}
+              <ul class="messages">
+                {% for message in messages %}
+                  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            <form method="POST" class="register-form" id="login-form">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="{{ form.email.id_for_label }}"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                {{ form.email }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.password.id_for_label }}"><i class="zmdi zmdi-lock"></i></label>
+                {{ form.password }}
+              </div>
+              <div class="form-group">
+                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term"/>
+                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+              </div>
+              <div class="form-group form-button">
+                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}
+
+{% block scrypts %}
+  <script src="{% static 'accounts/js/jquery.min.js' %}"></script>
+{% endblock %}

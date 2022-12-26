@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load category_tag %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'news/css/pages/category-detail.min.css' %}">
+  <link rel="stylesheet" href="{% static 'news/css/container-queries.css' %}">
+{% endblock %}
+
+{% block layouts %}
+  {{ block.super }}
+  {% get_categories %}
+  {% include "inc/_manage.html" with current_category=current_category %}
+{% endblock %}
+
+{% block body %}
+  <section class="category-detail">
+    <div class="category-detail__container container">
+      <ul class="category-detail__list">
+        {% for article in articles %}
+
+          {% if forloop.counter|divisibleby:2 %}
+            <li class="category-detail__item grid-item__split">
+              <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
+              {% include "news/components/card-split.html" %}
+            </li>
+          {% else %}
+            <li class="category-detail__item grid-item__solid">
+              <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
+              {% include "news/components/card-solid.html" %}
+            </li>
+          {% endif %}
+
+        {% empty %}
+          <p class="category-detail__empty">No any news in this category</p>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endblock %}

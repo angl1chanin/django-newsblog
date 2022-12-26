@@ -1,0 +1,48 @@
+{% load static %}
+{% load main-news_tag %}
+
+<section class="main">
+  <div class="main__container container">
+
+    <div class="grid">
+
+      {% main_grid_articles %}
+
+      <!--  Auto Rows -->
+      {% for article in articles %}
+        <article class="grid-item">
+          <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
+          <div class="card">
+            <img class="card__img" src="{% static 'news/assets/images/bg.jpg' %}" alt="">
+
+            <div class="card__body">
+              <p class="card__title">{{ article.title }}</p>
+              <p class="card__subtitle">Make money online through advertising</p>
+              <a href="{{ article.author.get_absolute_url }}" class="card__profile-link">
+                <figure class="card__profile">
+                  <img src="{{ article.author.avatar.url }}" alt="Profile image">
+                  <figcaption>
+                    <p class="card__author">{{ article.author.first_name }} {{ article.author.last_name }}</p>
+                    <p class="card__pubdate">{{ article.created_at|date:"d M" }}</p>
+                  </figcaption>
+                </figure>
+              </a>
+            </div>
+
+            <div class="card__footer">
+              <a class="card__link" href="#!">
+                <i class="fa-solid fa-bookmark"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+      <!--  End Auto Rows -->
+
+    </div>
+
+    <div class="main__btn-wrapper">
+      <a href="#!" class="btn">Load more</a>
+    </div>
+  </div>
+</section>

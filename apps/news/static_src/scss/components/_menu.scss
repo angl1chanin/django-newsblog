@@ -1,0 +1,16 @@
+.menu {
+
+  &__list {
+    display: flex;
+    column-gap: 3rem;
+    align-items: center;
+  }
+
+  &__item {
+    cursor: pointer;
+  }
+
+  &__link {
+    color: var(--header-text-color);
+  }
+}

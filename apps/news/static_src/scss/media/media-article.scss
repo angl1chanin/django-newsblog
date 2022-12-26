@@ -1,0 +1,21 @@
+.article {
+  @media screen and (max-width: 768px) {
+    &__info {
+      flex-direction: column;
+      row-gap: 2rem;
+    }
+
+    &__tags {
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    &__footer {
+      flex-direction: column-reverse;
+      row-gap: 2rem;
+    }
+  }
+}

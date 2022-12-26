@@ -1,0 +1,18 @@
+// core
+@import 'core/normalize';
+@import 'core/reset';
+@import 'core/typography';
+
+// abstracts
+@import 'abstracts/mixins';
+@import 'abstracts/vars';
+
+// base
+@import 'base/base';
+@import 'base/animations';
+@import 'base/utilities';
+
+// layouts
+@import 'layouts/header';
+@import 'layouts/footer';
+@import 'layouts/categories';

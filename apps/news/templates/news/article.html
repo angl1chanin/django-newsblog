@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load category_tag %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'news/css/pages/article.min.css' %}">
+  <link rel="stylesheet" href="{% static 'news/css/media/media-article.min.css' %}">
+{% endblock %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block layouts %}
+  {{ block.super }}
+  {% get_categories %}
+{% endblock %}
+
+{% block body %}
+  <section class="article">
+    <div class="article__container container">
+      <!--  Header  -->
+      <header class="article__header">
+        <a class="article__go-back" href="{{ request.META.HTTP_REFERER }}"><i class="fa-solid fa-arrow-left"></i></a>
+        <figure class="article__figure">
+          <img src="{{ article.photo.url }}" alt="">
+          <figcaption class="article__caption">
+            <h1 class="article__title">{{ article.title }}</h1>
+            <ul class="article__stats">
+              <li>
+                <i class="fa-regular fa-comments"></i>
+                <span>43</span>
+              </li>
+              <li>
+                <i class="fa-regular fa-heart"></i>
+                <span>{{ article.upvotes }}</span>
+              </li>
+            </ul>
+          </figcaption>
+        </figure>
+      </header>
+
+      <!--  Info  -->
+      <div class="article__info">
+        <figure class="article__author">
+          <a href="{{ article.author.get_absolute_url }}">
+            <img src="{{ article.author.avatar.url }}" alt="Profile icon">
+          </a>
+          <figcaption>{{ article.author.first_name }} {{ article.author.last_name }}</figcaption>
+        </figure>
+        <ul class="article__tags">
+          <li class="article__tag">
+            <a href="#!">Travel</a>
+          </li>
+          <li class="article__tag">
+            <a href="#!">Camping</a>
+          </li>
+        </ul>
+      </div>
+
+      <!--  Content  -->
+      <article class="article__content">
+        {{ article.content|safe }}
+      </article>
+
+      <!--  Footer  -->
+      <footer class="article__footer">
+        <ul class="article__share">
+          <li><a href="#!">Tweet</a></li>
+          <li><a href="#!">Vk</a></li>
+        </ul>
+        <ul class="article__estimate">
+          <li><a href="#!" class="article__like"><i class="fa-regular fa-thumbs-down"></i></a></li>
+          <li><a href="#!" class="article__dislike"><i class="fa-regular fa-thumbs-down"></i></a></li>
+        </ul>
+      </footer>
+
+      <!--  Comments  -->
+      <div class="article__comments comments">
+        <div class="comments__form-wrapper">
+          <form action="" class="comments__form">
+            <textarea placeholder="Write comment here"></textarea>
+            <button class="comments__btn btn" type="submit">Отправить</button>
+          </form>
+        </div>
+        <ul class="comments__list">
+          <li class="comments__item">
+            <div class="comments__card">
+              <figure class="comments__author-icon">
+                <img src="{% static 'news/assets/images/profile-icon.jpg' %}" alt="">
+              </figure>
+              <h3 class="comments__author-name">Serkan Bolat</h3>
+              <!-- if comment by author -->
+              <small>Author</small>
+              <!-- endif -->
+              <p class="comments__datetime"><i class="fa-regular fa-calendar"></i><span>24 april, 2018 14:43</span></p>
+              <h4 class="comments__message">It's pretty cool to create something is alreade created on the intrnet but
+                do it handsome u improve your skills and understanding of the developing process more deeper and some
+                things become easy to understand how it works under the hood</h4>
+              <hr class="comments__divider">
+              <p class="comments__like">
+                <a href="#!"><i class="fa-regular fa-heart"></i></a>
+                <span>34</span>
+              </p>
+            </div>
+          </li>
+          <li class="comments__item">
+            <div class="comments__card">
+              <figure class="comments__author-icon">
+                <img src="{% static 'news/assets/images/profile-icon.jpg' %}" alt="">
+              </figure>
+              <h3 class="comments__author-name">Neserkan Nebolat</h3>
+              <p class="comments__datetime"><i class="fa-regular fa-calendar"></i><span>24 april, 2018 14:43</span></p>
+              <h4 class="comments__message">It's pretty cool to create something is alreade created on the intrnet but
+                do it handsome u improve your skills and understanding of the developing process more deeper and some
+                things become easy to understand how it works under the hood</h4>
+              <hr class="comments__divider">
+              <p class="comments__like">
+                <a href="#!"><i class="fa-regular fa-heart"></i></a>
+                <span>34</span>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+{% endblock %}

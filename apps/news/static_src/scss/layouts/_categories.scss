@@ -1,0 +1,28 @@
+.categories {
+  padding: 2rem 0;
+  background-color: var(--categories-bg-color);
+  
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 2rem;
+    column-gap: 4rem;
+  }
+
+  &__link {
+    color: var(--categories-text-color);
+    transition: color .2s linear;
+    font-size: var(--categories-fz);
+
+    &:hover {
+      color: var(--categories-text-hover);
+    }
+
+    &_active {
+      font-weight: 400;
+      color: var(--categories-text-active);
+    }
+  }
+}

@@ -1,0 +1,138 @@
+$button-border-radius: 3.5rem;
+
+.manage {
+  padding: 2rem 0;
+}
+
+.manage {
+  padding: 2rem 0;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+
+    @media screen and (max-width: 480px) {
+      flex-direction: column;
+      row-gap: 2rem;
+    }
+  }
+
+  &__current-category {
+    @media screen and (max-width: 850px) {
+      display: none;
+    }
+  }
+
+  &__current-category span {
+    margin-left: 1rem;
+    color: var(--manage-text-color);
+    font-weight: 400;
+  }
+
+  &__output {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @media screen and (max-width: 850px) {
+      position: static;
+      transform: translateX(0);
+    }
+  }
+
+  &__output_active {
+    background-color: var(--manage-bg-color);
+  }
+
+  &__output ul {
+    display: flex;
+    border: var(--border);
+    border-radius: $button-border-radius;
+    overflow: hidden;
+  }
+
+  &__output ul li {
+    padding: var(--btn-padding);
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--btn-border-color);
+    }
+
+    &:hover {
+      background-color: var(--manage-bg-color);
+    }
+  }
+
+  &__output ul li a {
+    color: var(--btn-text-color);
+    font-weight: 400;
+  }
+
+  &__sort div {
+    display: inline-block;
+    position: relative;
+  }
+
+  &__sort span {
+    margin-right: 2rem;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__sort-btn {
+    svg {
+      margin-left: 1rem;
+
+      &.active {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__sort-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+    margin-top: 0.5rem;
+    border: var(--border);
+    border-radius: 2rem;
+    overflow: hidden;
+
+    li {
+      padding: var(--btn-padding);
+      transition: background-color 0.2s linear, color 0.2s linear;
+      cursor: pointer;
+      background-color: #fff;
+
+      &:not(:last-child) {
+        border-bottom: 0.2rem solid var(--btn-border-color);
+      }
+
+      &:hover,
+      &:focus {
+        background-color: var(--btn-border-color);
+        a {
+          color: var(--btn-hover-text-color);
+        }
+      }
+    }
+
+    li a {
+      color: var(--btn-text-color);
+      font-weight: 400;
+    }
+  }
+
+  &__sort-dropdown.active {
+    display: block;
+  }
+}

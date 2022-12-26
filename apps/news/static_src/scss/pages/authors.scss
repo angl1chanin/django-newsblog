@@ -1,0 +1,62 @@
+// Common
+@import '../common';
+
+/* ------Custom imports------ */
+
+// Components
+@import '../components/card';
+
+// layouts
+@import '../layouts/manage';
+
+.authors-cards {
+  padding-bottom: 4rem;
+
+  &__main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    gap: 4rem;
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    @include card;
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    background-color: var(--authors-card-bg);
+
+    figure img {
+      border: 1px solid var(--btn-border-color);
+    }
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+  }
+
+  &__bio {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__author-fullname {
+    color: var(--title-color);
+  }
+
+  &__description {
+    color: #333333;
+  }
+
+  &__stats span {
+    color: var(--title-color);
+  }
+}

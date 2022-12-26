@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load category_tag %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'news/css/pages/index.min.css' %}">
+  <link rel="stylesheet" href="{% static 'news/css/media/media-index.min.css' %}">
+  <link rel="stylesheet" href="{% static 'news/css/container-queries.css' %}">
+{% endblock %}
+
+{% block layouts %}
+  {{ block.super }}
+  {% get_categories %}
+  {% include "inc/_manage.html" with current_category="All" %}
+{% endblock %}
+
+{% block body %}
+  {% include "news/sections/_main.html" %}
+{% endblock %}

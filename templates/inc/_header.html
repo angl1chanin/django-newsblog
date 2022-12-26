@@ -1,0 +1,61 @@
+{% load static %}
+
+<header class="header">
+  <div class="header__container container">
+    {% if user.is_authenticated %}
+      <div>
+        <a class="header__btn btn" href="{% url 'news:create-article' %}"><i class="fa-solid fa-pen"></i><span>Write article</span></a>
+      </div>
+      <nav class="header__menu menu">
+        <ul class="menu__list">
+          <li class="menu__item">
+            <a class="menu__link" href="{% url 'news:home' %}">
+              <i class="fa-solid fa-house"></i>
+            </a>
+          </li>
+          <li class="menu__item">
+            <a class="menu__link" href="#!">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+          </li>
+          <li class="menu__item">
+            <i class="fa-solid fa-bell"></i>
+          </li>
+          <li class="menu__item">
+            <div class="select-menu">
+              <div class="select-btn">
+                <img class="select-img" src="{{ request.user.avatar.url }}" alt="">
+              </div>
+              <ul class="options">
+                <li class="option">
+                  <a class="option-text" href="{% url 'news:profile' %}">Профиль</a>
+                </li>
+                <li class="option">
+                  <a class="option-text" href="#!">Настройки</a>
+                </li>
+                <li class="option">
+                  <a class="option-text" href="{% url 'logout' %}">Выйти</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    {% else %}
+      <nav class="header__menu menu" style="padding: 2rem 0;">
+        <ul class="menu__list">
+          <li class="menu__item">
+            <a href="{% url 'accounts:signin' %}" class="menu__link btn">Sign in</a>
+          </li>
+          <li class="menu__item">
+            <a class="menu__link" href="{% url 'news:home' %}">
+              <i class="fa-solid fa-house"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+</header>
+
+<script src="{% static 'news/js/header.min.js' %}"></script>

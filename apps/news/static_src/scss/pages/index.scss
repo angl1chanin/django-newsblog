@@ -1,0 +1,74 @@
+// Common
+@import '../common';
+
+/* ------Custom imports------ */
+
+// Components
+@import '../components/card';
+@import '../components/card-solid';
+@import '../components/card-split';
+
+// layouts
+@import '../layouts/manage';
+
+.main {
+  margin-bottom: 5rem;
+
+  &__btn-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 17rem);
+  grid-auto-rows: 1fr;
+  gap: 4rem;
+
+  margin-bottom: 4rem;
+}
+
+.grid-item {
+  @include card;
+
+  &:nth-child(1) {
+    grid-row: span 2;
+    grid-column: span 2;
+  }
+  &:nth-child(6) {
+    grid-column: span 2;
+  }
+  &:nth-child(7) {
+    grid-column: span 2;
+  }
+  &:nth-child(8) {
+    grid-column: span 2;
+  }
+  &:nth-child(9) {
+    grid-column: span 2;
+  }
+}
+
+.grid-item__stretch {
+  grid-column: span 2;
+}
+
+.grid-item__solid {
+  container-type: inline-size;
+  container-name: card-solid;
+}
+
+.grid-item__split {
+  container-type: inline-size;
+  container-name: card-split;
+}
+
+.grid-item__card {
+  height: 100%;
+}
+
+.grid-item__ar {
+  @include card;
+}

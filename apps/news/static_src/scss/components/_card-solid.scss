@@ -1,0 +1,81 @@
+.card-solid {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  row-gap: 2rem;
+  color: #fff;
+  padding: 2rem;
+  height: 100%;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+  }
+
+  &__title {
+    font-size: 1.4rem;
+  }
+
+  &__subtitle {
+    font-size: 1.2rem;
+    color: #A89FA2;
+  }
+
+  &__profile-link {
+    display: flex;
+    align-self: self-start;
+    position: relative;
+  }
+
+  &__profile-link:hover &__profile {
+    background-color: #ffffff1f;
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    transition: background-color .2s linear;
+
+    img {
+      width: 4rem;
+      height: 4rem;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  &__author {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  &__pubdate {
+    font-size: 1.3rem;
+  }
+
+  &__footer {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+
+    display: flex;
+    column-gap: 2rem;
+  }
+
+  &__link {
+    pointer-events: all;
+    position: relative;
+    text-decoration: none;
+    transition: color 0.2s linear;
+    font-size: 1.6rem;
+    color: #A8AAAE;
+
+    &:hover {
+      color: red;
+    }
+  }
+}

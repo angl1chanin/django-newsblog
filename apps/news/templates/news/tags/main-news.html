@@ -1,0 +1,10 @@
+{% load main-news_tag %}
+
+{% for card_type, article in articles %}
+  <div class="grid-item grid-item__{{ card_type }}">
+    <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
+    {% include "news/components/card-"|add:card_type|add:".html" %}
+  </div>
+{% endfor %}
+
+

@@ -1,0 +1,29 @@
+@container card-solid (max-width: 295px) {
+  .card-solid__body {
+    height: 100%;
+    justify-content: space-around;
+  }
+
+  .card-solid__subtitle {
+    display: none;
+  }
+}
+
+@container card-split (max-width: 400px) {
+  .card-split {
+    grid-template-columns: 1fr;
+  }
+
+  .card-split__img {
+    display: none;
+  }
+
+  .card-split__body {
+    height: 100%;
+    justify-content: space-around;
+  }
+
+  .card-split__subtitle {
+    display: none;
+  }
+}

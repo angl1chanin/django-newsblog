@@ -1,0 +1,31 @@
+@import "../components/menu";
+@import "../components/select-menu";
+@import "../components/btn";
+
+.header {
+  background-color: var(--header-bg-color);
+  padding: 1rem 0;
+  border-bottom: 0.4rem solid var(--header-divider-color);
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__btn {
+    display: flex;
+    column-gap: 1rem;
+
+    @media screen and (max-width: 425px) {
+      padding: clamp(1rem, 0.673rem + 1.633vw, 2rem) !important;
+      span {
+        display: none;
+      }
+    }
+  }
+
+  &__menu {
+    display: inline-block;
+  }
+}

@@ -1,0 +1,22 @@
+<div class="card-solid"
+     style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ article.photo.url }}') center / cover no-repeat;">
+  <div class="card-solid__body">
+    <p class="card-solid__title">{{ article.title }}</p>
+    <p class="card-solid__subtitle">Make money online through advertising</p>
+    <a href="{{ article.author.get_absolute_url }}" class="card-solid__profile-link">
+      <figure class="card-solid__profile">
+        <img src="{{ article.author.avatar.url }}" alt="Profile image">
+        <figcaption>
+          <p class="card-solid__author">{{ article.author.first_name }} {{ article.author.last_name }}</p>
+          <p class="card-solid__pubdate">{{ article.created_at|date:"d M" }}</p>
+        </figcaption>
+      </figure>
+    </a>
+  </div>
+
+  <div class="card-solid__footer">
+    <a class="card-solid__link" href="#!">
+      <i class="fa-solid fa-bookmark"></i>
+    </a>
+  </div>
+</div>

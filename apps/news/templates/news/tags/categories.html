@@ -1,0 +1,14 @@
+<section class="categories">
+  <div class="categories__container container">
+    <ul class="categories__list">
+      <li class="categories__item">
+        <a href="{% url 'news:home' %}" class="categories__link categories__link_active">All</a>
+      </li>
+      {% for category in categories %}
+        <li class="categories__item">
+          <a href="{{ category.get_absolute_url }}" class="categories__link categories__link_active">{{ category.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

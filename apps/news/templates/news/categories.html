@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load category_tag %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'news/css/pages/categories-list.min.css' %}">
+  <link rel="stylesheet" href="{% static 'news/css/media/media-categories-list.min.css' %}">
+{% endblock %}
+
+{% block title %}Categories{% endblock %}
+
+{% block layouts %}
+  {{ block.super }}
+  {% get_categories %}
+  {% include "inc/_manage.html" %}
+{% endblock %}
+
+{% block body %}
+  <section class="categories-list">
+    <div class="categories-list__container container">
+      <ul class="categories-list__cards">
+
+        {% for category in categories %}
+          <li class="categories-list__card">
+            <a href="{{ category.get_absolute_url }}" class="categories-list__overlay-link"></a>
+            <figure>
+              <img src="{{ category.photo.url }}" alt="{{ category.title }}">
+              <figcaption>
+                {{ category.title }}
+              </figcaption>
+            </figure>
+          </li>
+        {% endfor %}
+
+      </ul>
+    </div>
+  </section>
+{% endblock %}

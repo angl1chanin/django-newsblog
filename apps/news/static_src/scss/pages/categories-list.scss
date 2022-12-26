@@ -1,0 +1,49 @@
+// Common
+@import '../common';
+
+/* ------Custom imports------ */
+
+// layouts
+@import '../layouts/manage';
+
+.categories-list {
+  padding-bottom: 4rem;
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 12rem;
+    gap: 4rem;
+  }
+
+  &__card {
+    @include card;
+
+    figure {
+      position: relative;
+      height: 100%;
+
+      img {
+        height: 100%;
+        width: 100%;
+        filter: brightness(60%);
+        object-fit: cover;
+      }
+
+      figcaption {
+        color: #fff;
+        font-size: 2rem;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &__overlay-link {
+    @include overlay-link;
+    z-index: 2;
+  }
+}

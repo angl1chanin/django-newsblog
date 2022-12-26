@@ -1,0 +1,16 @@
+.btn {
+  padding: var(--btn-padding);
+  color: var(--btn-text-color);
+  font-weight: 400;
+  text-transform: capitalize;
+  border: var(--border);
+  border-radius: 3.5rem;
+  background-color: transparent;
+  transition: background-color .2s linear, color .2s linear;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    background-color: var(--btn-border-color);
+    color: var(--btn-hover-text-color);
+  }
+}

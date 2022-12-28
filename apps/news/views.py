@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.views.generic import FormView
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # App imports
 from news.models import Category, Article
@@ -10,39 +12,48 @@ from news.models import Category, Article
 from accounts.models import User
 
 
-def home(request):
-    articles = Article.objects.all()[9:]
+class HomeView(ListView):
+    model = Article
+    template_name = 'news/home.html'
+    context_object_name = 'articles'
 
-    context = {
-        'articles': articles
-    }
-
-    return render(request, 'news/home.html', context=context)
-
-
-@login_required()
-def profile(request):
-    user = User.objects.get(username=request.user.username)
-    user_articles = Article.objects.filter(author__username=request.user.username)
-
-    context = {
-        'user': user,
-        'user_articles': user_articles,
-    }
-
-    return render(request, 'news/profile.html', context=context)
+    def get_queryset(self):
+        return self.model.objects.all()[9:]
 
 
-def profile_detail(request, username):
-    user = User.objects.get(username=username)
-    user_articles = Article.objects.filter(author__username=username)
+class ProfileView(DetailView, LoginRequiredMixin):
+    model = User
+    template_name = 'news/profile.html'
 
-    context = {
-        'user': user,
-        'user_articles': user_articles,
-    }
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data()
+        context.update({
+            'user_articles': Article.objects.filter(author__username=self.request.user.username)
+        })
+        return context
 
-    return render(request, 'news/profile.html', context=context)
+    def get_object(self, queryset=None):
+        return get_object_or_404(self.model, username=self.request.user.username)
+
+
+class ProfileDetailView(DetailView):
+    model = User
+    template_name = 'news/profile.html'
+
+    def get(self, request, *args, **kwargs):
+        if self.request.user.username == self.kwargs.get('username'):
+            return redirect('news:profile')
+        return super(ProfileDetailView, self).get(self, request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileDetailView, self).get_context_data()
+        context.update({
+            'user_articles': Article.objects.filter(author__username=self.kwargs.get('username'))
+        })
+        return context
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(self.model, username=self.kwargs.get('username'))
 
 
 def category_detail_list(request, category):
@@ -57,14 +68,9 @@ def category_detail_list(request, category):
     return render(request, 'news/category-detail.html', context=context)
 
 
-def categories(request):
-    categories_list = Category.objects.all()
-
-    context = {
-        'categories': categories_list
-    }
-
-    return render(request, 'news/categories.html', context=context)
+class CategoryListView(ListView):
+    model = Category
+    context_object_name = 'category_list'
 
 
 def authors(request):

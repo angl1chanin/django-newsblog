@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # App imports
 from news.models import Category, Article
+from news.forms import ArticleForm
 
 # External apps imports
 from accounts.models import User
@@ -22,7 +23,21 @@ class HomeView(ListView):
 
 
 def create(request):
-    return render(request, 'news/create.html')
+    form = ArticleForm()
+
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article = form.save(commit=False)
+            article.author = request.user
+            article.save()
+            return redirect('news:home')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'news/create.html', context=context)
 
 
 def authors(request):

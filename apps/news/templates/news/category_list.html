@@ -20,7 +20,7 @@
     <div class="categories-list__container container">
       <ul class="categories-list__cards">
 
-        {% for category in categories %}
+        {% for category in category_list %}
           <li class="categories-list__card">
             <a href="{{ category.get_absolute_url }}" class="categories-list__overlay-link"></a>
             <figure>

@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'news/css/pages/create.min.css' %}">
+{% endblock %}
 
 {% block body %}
-
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Опубликовать</button>
+  </form>
 {% endblock %}

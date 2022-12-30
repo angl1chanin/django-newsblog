@@ -13,7 +13,7 @@
         <article class="grid-item">
           <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
           <div class="card">
-            <img class="card__img" src="{% static 'news/assets/images/bg.jpg' %}" alt="">
+            <img class="card__img" src="{{ article.photo.url }}" alt="">
 
             <div class="card__body">
               <p class="card__title">{{ article.title }}</p>

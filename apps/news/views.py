@@ -21,6 +21,21 @@ class HomeView(ListView):
         return self.model.objects.all()[9:]
 
 
+def create(request):
+    return render(request, 'news/create.html')
+
+
+def authors(request):
+    return render(request, 'news/authors.html')
+
+
+class ArticleView(DetailView):
+    model = Article
+    template_name = 'news/article.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'article_title'
+
+
 class ProfileView(DetailView, LoginRequiredMixin):
     model = User
     template_name = 'news/profile.html'
@@ -56,36 +71,22 @@ class ProfileDetailView(DetailView):
         return get_object_or_404(self.model, username=self.kwargs.get('username'))
 
 
-def category_detail_list(request, category):
-    articles = Article.objects.filter(category__slug=category)
-    current_category = Category.objects.get(slug=category)
-
-    context = {
-        'articles': articles,
-        'current_category': current_category
-    }
-
-    return render(request, 'news/category-detail.html', context=context)
-
-
 class CategoryListView(ListView):
     model = Category
     context_object_name = 'category_list'
 
 
-def authors(request):
-    return render(request, 'news/authors.html')
+class CategoryView(ListView):
+    model = Article
+    template_name = 'news/category-detail.html'
+    context_object_name = 'articles'
 
+    def get_queryset(self):
+        return self.model.objects.filter(category__slug=self.kwargs.get('category'))
 
-def article(request, category, article_title):
-    article_detail = Article.objects.get(category__slug=category, slug=article_title)
-
-    context = {
-        'article': article_detail,
-    }
-
-    return render(request, 'news/article.html', context=context)
-
-
-def create(request):
-    return render(request, 'news/create.html')
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CategoryView, self).get_context_data()
+        context.update({
+            'current_category': Category.objects.get(slug=self.kwargs.get('category'))
+        })
+        return context

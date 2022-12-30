@@ -36,7 +36,7 @@ class Article(models.Model):
         return reverse_lazy("news:article-detail", kwargs=context)
 
     def save(self, *args, **kwargs):
-        if self.slug is None:
+        if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 

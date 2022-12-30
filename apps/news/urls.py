@@ -1,7 +1,10 @@
 from django.urls import path
 
 from news.views import authors, create
-from news.views import HomeView, ProfileView, ProfileDetailView, CategoryListView, CategoryView, ArticleView
+from news.views import (
+    HomeView, ProfileView, ProfileDetailView, CategoryListView,
+    CategoryView, ArticleView
+)
 
 app_name = 'news'
 

@@ -38,7 +38,6 @@ class Article(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify_title(self.title)
-        print(self.photo)
         super().save(*args, **kwargs)
 
 

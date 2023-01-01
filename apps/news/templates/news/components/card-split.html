@@ -3,7 +3,7 @@
 
   <div class="card-split__body">
     <p class="card-split__title">{{ article.title }}</p>
-    <p class="card-split__subtitle">Make money online through advertising</p>
+    <p class="card-split__subtitle">{{ article.content|truncatechars:50|striptags }}</p>
     <a href="{{ article.author.get_absolute_url }}" class="card-split__profile-link">
       <figure class="card-split__profile">
         <img src="{{ article.author.avatar.url }}" alt="Profile image">

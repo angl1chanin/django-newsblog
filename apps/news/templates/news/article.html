@@ -47,12 +47,13 @@
           <figcaption>{{ article.author.first_name }} {{ article.author.last_name }}</figcaption>
         </figure>
         <ul class="article__tags">
-          <li class="article__tag">
-            <a href="#!">Travel</a>
-          </li>
-          <li class="article__tag">
-            <a href="#!">Camping</a>
-          </li>
+          {% for tag in article.tags.all %}
+            <li class="article__tag">
+              <a href="#!">{{ tag.title }}</a>
+            </li>
+          {% empty %}
+            <p>No tags</p>
+          {% endfor %}
         </ul>
       </div>
 

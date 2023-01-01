@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import FormView
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 # App imports
-from news.models import Category, Article
+from news.models import Category, Article, Tag
 from news.forms import ArticleForm
+from news.utils import rename_photo_to_slug
 
 # External apps imports
 from accounts.models import User
@@ -22,26 +24,38 @@ class HomeView(ListView):
         return self.model.objects.all()[9:]
 
 
-def create(request):
-    form = ArticleForm()
+class ArticleCreateView(CreateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'news/create.html'
 
-    if request.method == 'POST':
-        form = ArticleForm(request.POST)
+    # TODO: Create function for rename of an uploaded file to slug.extension format
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(data=request.POST, files=request.FILES)
         if form.is_valid():
             article = form.save(commit=False)
             article.author = request.user
             article.save()
-            return redirect('news:home')
+            return HttpResponseRedirect(
+                reverse_lazy(
+                    'news:article-detail',
+                    kwargs={
+                        'category': article.category.slug,
+                        'article_title': article.slug
+                    }
+                )
+            )
+        return HttpResponse("Invalid form")
 
-    context = {
-        'form': form,
-    }
 
-    return render(request, 'news/create.html', context=context)
+class AuthorsListView(ListView):
+    model = User
+    template_name = 'news/authors.html'
 
 
-def authors(request):
-    return render(request, 'news/authors.html')
+class TagsView(ListView):
+    model = Tag
+    template_name = 'news/tags.html'
 
 
 class ArticleView(DetailView):
@@ -60,6 +74,11 @@ class ProfileView(DetailView, LoginRequiredMixin):
         context.update({
             'user_articles': Article.objects.filter(author__username=self.request.user.username)
         })
+        if self.request.GET:
+            if (display_type := self.request.GET.get('display')) in ['solid', 'split']:
+                context.update({
+                    'display_type': display_type
+                })
         return context
 
     def get_object(self, queryset=None):
@@ -80,6 +99,11 @@ class ProfileDetailView(DetailView):
         context.update({
             'user_articles': Article.objects.filter(author__username=self.kwargs.get('username'))
         })
+        if self.request.GET:
+            if (display_type := self.request.GET.get('display')) in ['solid', 'split']:
+                context.update({
+                    'display_type': display_type
+                })
         return context
 
     def get_object(self, queryset=None):

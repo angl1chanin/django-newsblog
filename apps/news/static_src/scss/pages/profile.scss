@@ -75,8 +75,8 @@
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 18rem;
     gap: 1rem;
   }
 
@@ -87,10 +87,19 @@
   &__publication {
     @include card;
   }
-}
 
-.overlay-link {
-  @include overlay-link;
+  &__display {
+    display: flex;
+    column-gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__display-link {
+    transition: color .2s linear;
+    &:hover {
+      color: #000;
+    }
+  }
 }
 
 @include card-split-container-query;

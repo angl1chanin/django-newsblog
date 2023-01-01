@@ -41,21 +41,36 @@
           </div>
           <div class="profile__col">
             <h3 class="profile__title profile__publication-title">Publications</h3>
+            <ul class="profile__display">
+              <li><a class="profile__display-link" href="{{ request.path }}?display=solid"><i
+                      class="fa-solid fa-list"></i> Solid</a></li>
+              <li><a class="profile__display-link" href="{{ request.path }}?display=split"><i
+                      class="fa-solid fa-list-ul"></i> Split</a></li>
+            </ul>
             <div class="profile__publications">
               <ul class="profile__list">
-                {% for article in user_articles %}
-                  {% if forloop.counter|divisibleby:2 %}
+                {% if display_type %}
+                  {% for article in user_articles %}
                     <li class="profile__publication grid-item__split">
                       <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
-                      {% include "news/components/card-split.html" %}
+                      {% include "news/components/card-"|add:display_type|add:".html" %}
                     </li>
-                  {% else %}
-                    <li class="profile__publication grid-item__solid">
-                      <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
-                      {% include "news/components/card-solid.html" %}
-                    </li>
-                  {% endif %}
-                {% endfor %}
+                  {% endfor %}
+                {% else %}
+                  {% for article in user_articles %}
+                    {% if forloop.counter|divisibleby:2 %}
+                      <li class="profile__publication grid-item__split">
+                        <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
+                        {% include "news/components/card-split.html" %}
+                      </li>
+                    {% else %}
+                      <li class="profile__publication grid-item__solid">
+                        <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
+                        {% include "news/components/card-solid.html" %}
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
               </ul>
             </div>
           </div>

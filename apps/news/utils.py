@@ -7,5 +7,14 @@ alphabet = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', '�
             'я': 'ya', 'ь': ''}
 
 
-def slugify(s: str) -> str:
+def slugify_title(s: str) -> str:
     return django_slugify(''.join(alphabet.get(w, w) for w in s.lower())) + '-' + str(randint(10000, 99999))
+
+
+def slugify_str(string: str) -> str:
+    return django_slugify(''.join(alphabet.get(w, w) for w in s.lower()))
+
+
+def rename_photo_to_slug(filename: str, article_slug: str) -> str:
+    file_extension = filename.split('.')[1]
+    return article_slug + file_extension

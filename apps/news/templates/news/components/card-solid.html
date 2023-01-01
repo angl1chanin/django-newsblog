@@ -2,7 +2,7 @@
      style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ article.photo.url }}') center / cover no-repeat;">
   <div class="card-solid__body">
     <p class="card-solid__title">{{ article.title }}</p>
-    <p class="card-solid__subtitle">Make money online through advertising</p>
+    <p class="card-solid__subtitle">{{ article.content|truncatechars:50|striptags }}</p>
     <a href="{{ article.author.get_absolute_url }}" class="card-solid__profile-link">
       <figure class="card-solid__profile">
         <img src="{{ article.author.avatar.url }}" alt="Profile image">

@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.urls import reverse_lazy
 
 from accounts.models import User
-from news.utils import slugify
+from news.utils import slugify_title, slugify_str, rename_photo_to_slug
 
 
 class Article(models.Model):
@@ -37,7 +37,8 @@ class Article(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify_title(self.title)
+        print(self.photo)
         super().save(*args, **kwargs)
 
 
@@ -62,12 +63,13 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify_str(self.title)
         super().save(*args, **kwargs)
 
 
 class Tag(models.Model):
     title = models.CharField(max_length=30, verbose_name="Название")
+    slug = models.SlugField(max_length=30, unique=True, null=True, verbose_name="Slug")
 
     class Meta:
         verbose_name = "Тэг"
@@ -76,3 +78,11 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('news:tags-list')
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify_str(self.title)
+        super().save(*args, **kwargs)

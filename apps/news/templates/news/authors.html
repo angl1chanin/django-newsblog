@@ -18,133 +18,21 @@
   <section class="authors-cards">
     <div class="authors-cards__container container">
       <div class="authors-cards__main">
-
-        <a href="#!" class="authors-cards__card card">
-          <figure class="card__profile">
-            <img src="{% static 'news/assets/images/profile3.jpg' %}" alt="">
-            <figcaption>
-              <p class="authors-cards__author-fullname">Lora Stevenson</p>
-            </figcaption>
-          </figure>
-          <p class="authors-cards__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque sed
-            itaque
-            rem eveniet obcaecati laborum cum
-            iure modi alias, provident sequi optio velit excepturi veritatis libero tempora pariatur voluptate fugit?
-            Quo inventore minima autem quos.</p>
-          <div class="authors-cards__stats">
-            <span>4.5</span>
-            <span>143 articles</span>
-          </div>
-        </a>
-
-        <a href="#!" class="authors-cards__card card">
-          <figure class="card__profile">
-            <img src="{% static 'news/assets/images/profile3.jpg' %}" alt="">
-            <figcaption>
-              <p class="authors-cards__author-fullname card__author-fullname">Lora Stevenson</p>
-            </figcaption>
-          </figure>
-          <p class="authors-cards__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque sed
-            itaque
-            rem eveniet obcaecati laborum cum
-            iure modi alias, provident sequi optio velit excepturi veritatis libero tempora pariatur voluptate fugit?
-            Quo inventore minima autem quos.</p>
-          <div class="authors-cards__stats">
-            <span>4.5</span>
-            <span>143 articles</span>
-          </div>
-        </a>
-
-        <a href="#!" class="authors-cards__card card">
-          <figure class="card__profile">
-            <img src="{% static 'news/assets/images/profile3.jpg' %}" alt="">
-            <figcaption>
-              <p class="authors-cards__author-fullname card__author-fullname">Lora Stevenson</p>
-            </figcaption>
-          </figure>
-          <p class="authors-cards__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque sed
-            itaque
-            rem eveniet obcaecati laborum cum
-            iure modi alias, provident sequi optio velit excepturi veritatis libero tempora pariatur voluptate fugit?
-            Quo inventore minima autem quos.</p>
-          <div class="authors-cards__stats">
-            <span>4.5</span>
-            <span>143 articles</span>
-          </div>
-        </a>
-
-        <a href="#!" class="authors-cards__card card">
-          <figure class="card__profile">
-            <img src="{% static 'news/assets/images/profile3.jpg' %}" alt="">
-            <figcaption>
-              <p class="authors-cards__author-fullname card__author-fullname">Lora Stevenson</p>
-            </figcaption>
-          </figure>
-          <p class="authors-cards__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque sed
-            itaque
-            rem eveniet obcaecati laborum cum
-            iure modi alias, provident sequi optio velit excepturi veritatis libero tempora pariatur voluptate fugit?
-            Quo inventore minima autem quos.</p>
-          <div class="authors-cards__stats">
-            <span>4.5</span>
-            <span>143 articles</span>
-          </div>
-        </a>
-
-        <a href="#!" class="authors-cards__card card">
-          <figure class="card__profile">
-            <img src="{% static 'news/assets/images/profile3.jpg' %}" alt="">
-            <figcaption>
-              <p class="authors-cards__author-fullname card__author-fullname">Lora Stevenson</p>
-            </figcaption>
-          </figure>
-          <p class="authors-cards__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque sed
-            itaque
-            rem eveniet obcaecati laborum cum
-            iure modi alias, provident sequi optio velit excepturi veritatis libero tempora pariatur voluptate fugit?
-            Quo inventore minima autem quos.</p>
-          <div class="authors-cards__stats">
-            <span>4.5</span>
-            <span>143 articles</span>
-          </div>
-        </a>
-
-        <a href="#!" class="authors-cards__card card">
-          <figure class="card__profile">
-            <img src="{% static 'news/assets/images/profile3.jpg' %}" alt="">
-            <figcaption>
-              <p class="authors-cards__author-fullname card__author-fullname">Lora Stevenson</p>
-            </figcaption>
-          </figure>
-          <p class="authors-cards__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque sed
-            itaque
-            rem eveniet obcaecati laborum cum
-            iure modi alias, provident sequi optio velit excepturi veritatis libero tempora pariatur voluptate fugit?
-            Quo inventore minima autem quos.</p>
-          <div class="authors-cards__stats">
-            <span>4.5</span>
-            <span>143 articles</span>
-          </div>
-        </a>
-
-        <a href="#!" class="authors-cards__card card">
-          <figure class="card__profile">
-            <img src="{% static 'news/assets/images/profile3.jpg' %}" alt="">
-            <figcaption>
-              <p class="authors-cards__author-fullname card__author-fullname">Lora Stevenson</p>
-            </figcaption>
-          </figure>
-          <p class="authors-cards__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque sed
-            itaque
-            rem eveniet obcaecati laborum cum
-            iure modi alias, provident sequi optio velit excepturi veritatis libero tempora pariatur voluptate fugit?
-            Quo inventore minima autem quos.</p>
-          <div class="authors-cards__stats">
-            <span>4.5</span>
-            <span>143 articles</span>
-          </div>
-        </a>
-
+        {% for user in user_list %}
+          <a href="{{ user.get_absolute_url }}" class="authors-cards__card card">
+            <figure class="card__profile">
+              <img src="{{ user.avatar.url }}" alt="">
+              <figcaption>
+                <p class="authors-cards__author-fullname">{{ user.first_name }} {{ user.last_name }}</p>
+              </figcaption>
+            </figure>
+            <p class="authors-cards__description">{{ user.bio }}</p>
+            <div class="authors-cards__stats">
+              <span>4.5</span>
+              <span>{{ user.article_set.count }} articles</span>
+            </div>
+          </a>
+        {% endfor %}
       </div>
     </div>
   </section>

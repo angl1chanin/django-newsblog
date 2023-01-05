@@ -86,10 +86,7 @@ class ProfileView(DetailView, LoginRequiredMixin):
         return get_object_or_404(self.model, username=self.request.user.username)
 
 
-class ProfileDetailView(DetailView):
-    model = User
-    template_name = 'news/profile.html'
-
+class ProfileDetailView(ProfileView):
     def get(self, request, *args, **kwargs):
         if self.request.user.username == self.kwargs.get('username'):
             return redirect('news:profile')
@@ -100,11 +97,6 @@ class ProfileDetailView(DetailView):
         context.update({
             'user_articles': Article.objects.filter(author__username=self.kwargs.get('username'))
         })
-        if self.request.GET:
-            if (display_type := self.request.GET.get('display')) in ['solid', 'split']:
-                context.update({
-                    'display_type': display_type
-                })
         return context
 
     def get_object(self, queryset=None):

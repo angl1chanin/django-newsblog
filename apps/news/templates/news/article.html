@@ -59,6 +59,16 @@
 
       <!--  Content  -->
       <article class="article__content">
+        <div class="article__about">
+          <ul>
+            <li>
+              <p class="article__pubdate"><i class="fa-solid fa-calendar-plus"></i> {{ article.created_at }}</p>
+            </li>
+            <li>
+              <p class="article__editdate"><i class="fa-regular fa-pen-to-square"></i> {{ article.updated_at }}</p>
+            </li>
+          </ul>
+        </div>
         {{ article.content|safe }}
       </article>
 

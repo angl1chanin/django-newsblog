@@ -1,4 +1,7 @@
 {% load static %}
+{% url 'news:home' as home_url %}
+{% url 'news:categories-list' as categories_list_url %}
+{% url 'news:authors-list' as authors_list_url %}
 
 <section class="manage">
   <div class="manage__container container">
@@ -9,14 +12,14 @@
 
     <div class="manage__output">
       <ul>
-        <li class="manage__output_active">
-          <a href="{% url 'news:home' %}">Articles</a>
+        <li class="{% if request.path == home_url %}manage__output_active{% endif %}">
+          <a href="{{ home_url }}">Articles</a>
         </li>
-        <li>
-          <a href="{% url 'news:categories-list' %}">Categories</a>
+        <li class="{% if request.path == categories_list_url %}manage__output_active{% endif %}">
+          <a href="{{ categories_list_url }}">Categories</a>
         </li>
-        <li>
-          <a href="{% url 'news:authors-list' %}">Authors</a>
+        <li class="{% if request.path == authors_list_url %}manage__output_active{% endif %}">
+          <a href="{{ authors_list_url }}">Authors</a>
         </li>
       </ul>
     </div>

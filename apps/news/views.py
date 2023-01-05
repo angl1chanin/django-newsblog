@@ -30,6 +30,7 @@ class ArticleCreateView(CreateView):
     template_name = 'news/create.html'
 
     # TODO: Create function for rename of an uploaded file to slug.extension format
+    # TODO: Fix: do not adds tags
     def post(self, request, *args, **kwargs):
         form = self.form_class(data=request.POST, files=request.FILES)
         if form.is_valid():
@@ -129,3 +130,19 @@ class CategoryView(ListView):
             'current_category': Category.objects.get(slug=self.kwargs.get('category'))
         })
         return context
+
+
+@login_required
+def fav_add(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    if article.bookmarks.filter(pk=request.user.pk).exists():
+        article.bookmarks.remove(request.user)
+    else:
+        article.bookmarks.add(request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def fav_list(request):
+    posts = Article.objects.filter(bookmarks=request.user)
+    return render(request, 'news/favourites.html', context={'posts': posts})

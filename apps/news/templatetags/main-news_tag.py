@@ -6,10 +6,11 @@ register = template.Library()
 
 
 @register.inclusion_tag('news/tags/main-news.html')
-def main_grid_articles():
+def main_grid_articles(request):
     articles = Article.objects.all()[:9]
     card_types = ['solid', 'split', 'solid', 'split', 'split', 'split', 'solid', 'split', 'split']
 
     return {
         'articles': zip(card_types, articles),
+        'request': request
     }

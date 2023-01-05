@@ -2,3 +2,32 @@
 @import '../common';
 
 /* ------Custom imports------ */
+
+.create {
+  &__container {
+    padding: 4rem 0;
+  }
+
+  &__form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: 1rem;
+    }
+  }
+
+  &__btn {
+    align-self: center;
+  }
+}

@@ -2,18 +2,24 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse_lazy
 
-from accounts.models import User
+# App imports
 from news.utils import slugify_title, slugify_str, rename_photo_to_slug
+
+# External apps imports
+from accounts.models import User
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Article(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150, verbose_name="Название")
+    title = models.CharField(max_length=150, verbose_name="Название статьи")
     slug = models.SlugField(max_length=150, unique=True, db_index=True, blank=True, null=True, verbose_name="Slug")
-    photo = models.ImageField(upload_to="photos/%Y/%m/%d", null=True)
-    content = models.TextField(blank=True, verbose_name="Статья")
+    photo = models.ImageField(upload_to="photos/%Y/%m/%d", null=True, verbose_name="Фотография статьи")
+    content = models.TextField(blank=True, null=True, verbose_name="Статья")
     category = models.ForeignKey("Category", on_delete=models.PROTECT, null=True, verbose_name="Категория")
-    tags = models.ManyToManyField("Tag", blank=True)
+    tags = models.ManyToManyField("Tag", blank=True, verbose_name="Тэги")
+    bookmarks = models.ManyToManyField(User, blank=True, related_name="bookmarks_user", verbose_name="В закладках")
     upvotes = models.PositiveIntegerField(default=0, editable=False, verbose_name="Лайки")
     downvotes = models.PositiveIntegerField(default=0, editable=False, verbose_name="Дизлайки")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'news/css/pages/favourites.min.css' %}">
+{% endblock %}
+
+{% block body %}
+  <section class="favourites">
+    <div class="favourites__container container">
+      {% for post in posts %}
+        <p>
+          <a href="{{ post.get_absolute_url }}">{{ post }}</a>
+        </p>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}
+

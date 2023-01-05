@@ -44,6 +44,9 @@ $button-border-radius: 3.5rem;
 
   &__output_active {
     background-color: var(--manage-bg-color);
+    a {
+      color: var(--manage-text-hover-color) !important;
+    }
   }
 
   &__output ul {
@@ -64,6 +67,10 @@ $button-border-radius: 3.5rem;
 
     &:hover {
       background-color: var(--manage-bg-color);
+
+      a {
+        color: var(--manage-text-hover-color);
+      }
     }
   }
 

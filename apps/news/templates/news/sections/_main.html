@@ -6,7 +6,7 @@
 
     <div class="grid">
 
-      {% main_grid_articles %}
+      {% main_grid_articles request %}
 
       <!--  Auto Rows -->
       {% for article in articles %}
@@ -30,7 +30,7 @@
             </div>
 
             <div class="card__footer">
-              <a class="card__link" href="#!">
+              <a class="card__link {% if request.user in article.bookmarks.all %}card__link_active{% endif %}" href="{% url 'news:favourites' article.pk %}">
                 <i class="fa-solid fa-bookmark"></i>
               </a>
             </div>

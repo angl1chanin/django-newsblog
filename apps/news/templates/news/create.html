@@ -6,9 +6,16 @@
 {% endblock %}
 
 {% block body %}
-  <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Опубликовать</button>
-  </form>
+  <section class="create">
+    <div class="create__container container">
+      <div class="create__form-wrapper">
+        <form class="create__form" action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.media }}
+          {{ form.as_div }}
+          <button class="create__btn btn" type="submit">Опубликовать</button>
+        </form>
+      </div>
+    </div>
+  </section>
 {% endblock %}

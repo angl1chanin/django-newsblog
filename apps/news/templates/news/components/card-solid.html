@@ -15,7 +15,7 @@
   </div>
 
   <div class="card-solid__footer">
-    <a class="card-solid__link" href="#!">
+    <a class="card-solid__link {% if request.user in article.bookmarks.all %}card-solid__link_active{% endif %}" href="{% url 'news:favourites' article.pk %}">
       <i class="fa-solid fa-bookmark"></i>
     </a>
   </div>

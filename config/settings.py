@@ -135,9 +135,9 @@ MEDIA_URL = "media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_URL = reverse_lazy("login")
-LOGIN_REDIRECT_URL = reverse_lazy("news:home")
-LOGOUT_REDIRECT_URL = reverse_lazy("news:home")
+LOGIN_URL = 'accounts:signin'
+LOGIN_REDIRECT_URL = 'news:home'
+LOGOUT_REDIRECT_URL = 'news:home'
 AUTH_USER_MODEL = "accounts.user"
 
 # Ckeditor

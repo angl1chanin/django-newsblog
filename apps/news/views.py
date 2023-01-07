@@ -30,13 +30,13 @@ class ArticleCreateView(CreateView):
     template_name = 'news/create.html'
 
     # TODO: Create function for rename of an uploaded file to slug.extension format
-    # TODO: Fix: do not adding tags
     def post(self, request, *args, **kwargs):
         form = self.form_class(data=request.POST, files=request.FILES)
         if form.is_valid():
             article = form.save(commit=False)
             article.author = request.user
             article.save()
+            form.save_m2m()
             return HttpResponseRedirect(
                 reverse_lazy(
                     'news:article-detail',
@@ -146,4 +146,6 @@ def fav_clear(request):
     if articles.exists():
         for article in articles:
             article.bookmarks.remove(request.user)
+    if 'HTTP_REFERER' not in request.META:
+        return redirect('news:home')
     return HttpResponseRedirect(request.META['HTTP_REFERER'])

@@ -84,10 +84,6 @@
     margin-bottom: 3rem;
   }
 
-  &__publication {
-    @include card;
-  }
-
   &__display {
     display: flex;
     column-gap: 2rem;
@@ -101,6 +97,3 @@
     }
   }
 }
-
-@include card-split-container-query;
-@include card-solid-container-query;

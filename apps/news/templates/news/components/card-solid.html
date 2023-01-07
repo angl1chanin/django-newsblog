@@ -1,22 +1,25 @@
-<div class="card-solid"
-     style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ article.photo.url }}') center / cover no-repeat;">
-  <div class="card-solid__body">
-    <p class="card-solid__title">{{ article.title }}</p>
-    <p class="card-solid__subtitle">{{ article.content|truncatechars:50|striptags }}</p>
-    <a href="{{ article.author.get_absolute_url }}" class="card-solid__profile-link">
-      <figure class="card-solid__profile">
-        <img src="{{ article.author.avatar.url }}" alt="Profile image">
-        <figcaption>
-          <p class="card-solid__author">{{ article.author.first_name }} {{ article.author.last_name }}</p>
-          <p class="card-solid__pubdate">{{ article.created_at|date:"d M" }}</p>
-        </figcaption>
-      </figure>
-    </a>
-  </div>
+<div class="card-solid-cq {{ additional_class }}">
+  <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
+  <div class="card-solid"
+       style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ article.photo.url }}') center / cover no-repeat;">
+    <div class="card-solid__body">
+      <p class="card-solid__title">{{ article.title }}</p>
+      <p class="card-solid__subtitle">{{ article.content|truncatechars:50|striptags }}</p>
+      <a href="{{ article.author.get_absolute_url }}" class="card-solid__profile-link">
+        <figure class="card-solid__profile">
+          <img src="{{ article.author.avatar.url }}" alt="Profile image">
+          <figcaption>
+            <p class="card-solid__author">{{ article.author.first_name }} {{ article.author.last_name }}</p>
+            <p class="card-solid__pubdate">{{ article.created_at|date:"d M" }}</p>
+          </figcaption>
+        </figure>
+      </a>
+    </div>
 
-  <div class="card-solid__footer">
-    <a class="card-solid__link {% if request.user in article.bookmarks.all %}card-solid__link_active{% endif %}" href="{% url 'news:favourites' article.pk %}">
-      <i class="fa-solid fa-bookmark"></i>
-    </a>
+    <div class="card-solid__footer">
+      <a class="card-solid__link {% if request.user in article.bookmarks.all %}card-solid__link_active{% endif %}" href="{% url 'news:favourites' article.pk %}">
+        <i class="fa-solid fa-bookmark"></i>
+      </a>
+    </div>
   </div>
 </div>

@@ -21,15 +21,9 @@
         {% for article in articles %}
 
           {% if forloop.counter|divisibleby:2 %}
-            <li class="category-detail__item grid-item__split">
-              <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
-              {% include "news/components/card-split.html" %}
-            </li>
+            {% include "news/components/card-split.html" %}
           {% else %}
-            <li class="category-detail__item grid-item__solid">
-              <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
-              {% include "news/components/card-solid.html" %}
-            </li>
+            {% include "news/components/card-solid.html" %}
           {% endif %}
 
         {% empty %}

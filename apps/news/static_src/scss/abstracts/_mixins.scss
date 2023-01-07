@@ -22,16 +22,9 @@
   box-shadow: 4px 4px 8px -2px rgba(34, 60, 80, 0.2);
 }
 
-@mixin card-solid-container-query {
-  .grid-item__solid {
-    container-type: inline-size;
-    container-name: card-solid;
-  }
-}
-
-@mixin card-split-container-query {
-  .grid-item__split {
-    container-type: inline-size;
-    container-name: card-split;
-  }
+@mixin pos-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }

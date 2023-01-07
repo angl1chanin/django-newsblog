@@ -49,30 +49,29 @@
                       class="fa-solid fa-list-ul"></i> Split</a></li>
             </ul>
             <div class="profile__publications">
-              <ul class="profile__list">
+
+              <div class="profile__list">
                 {% if display_type %}
+
                   {% for article in user_articles %}
-                    <li class="profile__publication grid-item__split">
-                      <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
-                      {% include "news/components/card-"|add:display_type|add:".html" %}
-                    </li>
+                    {% include "news/components/card-"|add:display_type|add:".html" %}
                   {% endfor %}
+
                 {% else %}
+
                   {% for article in user_articles %}
+
                     {% if forloop.counter|divisibleby:2 %}
-                      <li class="profile__publication grid-item__split">
-                        <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
-                        {% include "news/components/card-split.html" %}
-                      </li>
+                      {% include "news/components/card-split.html" %}
                     {% else %}
-                      <li class="profile__publication grid-item__solid">
-                        <a href="{{ article.get_absolute_url }}" class="overlay-link"></a>
-                        {% include "news/components/card-solid.html" %}
-                      </li>
+                      {% include "news/components/card-solid.html" %}
                     {% endif %}
+
                   {% endfor %}
+
                 {% endif %}
-              </ul>
+              </div>
+
             </div>
           </div>
         </div>

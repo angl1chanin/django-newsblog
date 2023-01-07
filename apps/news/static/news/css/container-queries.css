@@ -9,21 +9,23 @@
   }
 }
 
+@container card-split (max-width: 505px) {
+  .card-split__subtitle {
+    display: none;
+  }
+}
+
 @container card-split (max-width: 400px) {
   .card-split {
     grid-template-columns: 1fr;
   }
 
-  .card-split__img {
+  .card-split__img-wrapper {
     display: none;
   }
 
   .card-split__body {
     height: 100%;
     justify-content: space-around;
-  }
-
-  .card-split__subtitle {
-    display: none;
   }
 }

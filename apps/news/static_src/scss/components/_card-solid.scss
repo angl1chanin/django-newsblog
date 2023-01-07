@@ -1,8 +1,15 @@
+.card-solid-cq {
+  container-type: inline-size;
+  container-name: card-solid;
+  @include card;
+}
+
 .card-solid {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   row-gap: 2rem;
+  position: relative;
   color: #fff;
   padding: 2rem;
   height: 100%;
@@ -26,6 +33,7 @@
     display: flex;
     align-self: self-start;
     position: relative;
+    z-index: 2;
   }
 
   &__profile-link:hover &__profile {
@@ -61,6 +69,7 @@
     position: absolute;
     bottom: 2rem;
     right: 2rem;
+    z-index: 2;
 
     display: flex;
     column-gap: 2rem;

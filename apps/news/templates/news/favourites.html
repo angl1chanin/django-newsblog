@@ -3,16 +3,27 @@
 
 {% block styles %}
   <link rel="stylesheet" href="{% static 'news/css/pages/favourites.min.css' %}">
+  <link rel="stylesheet" href="{% static 'news/css/container-queries.css' %}">
+  <link rel="stylesheet" href="{% static 'news/css/media/media-favourites.min.css' %}">
 {% endblock %}
 
 {% block body %}
   <section class="favourites">
     <div class="favourites__container container">
-      {% for post in posts %}
-        <p>
-          <a href="{{ post.get_absolute_url }}">{{ post }}</a>
-        </p>
-      {% endfor %}
+
+      {% if articles.exists %}
+        <div class="favourites__btn-wrapper">
+          <a class="favourites__btn btn" href="{% url 'news:favourites-clear' %}">Clear all</a>
+        </div>
+      {% endif %}
+
+      <div class="favourites__grid">
+        {% for article in articles %}
+          {% include "news/components/card.html" %}
+        {% empty %}
+          <p class="favourites__empty">No favourites articles</p>
+        {% endfor %}
+      </div>
     </div>
   </section>
 {% endblock %}

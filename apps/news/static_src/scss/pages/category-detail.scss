@@ -25,13 +25,6 @@
   }
 
   &__empty {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-
-    text-align: center;
+    @include pos-center;
   }
 }
-
-@include card-split-container-query;
-@include card-solid-container-query;

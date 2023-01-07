@@ -8,4 +8,5 @@
 
 .overlay-link {
   @include overlay-link;
+  z-index: 1;
 }

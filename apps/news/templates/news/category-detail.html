@@ -19,13 +19,7 @@
     <div class="category-detail__container container">
       <ul class="category-detail__list">
         {% for article in articles %}
-
-          {% if forloop.counter|divisibleby:2 %}
-            {% include "news/components/card-split.html" %}
-          {% else %}
-            {% include "news/components/card-solid.html" %}
-          {% endif %}
-
+          {% include 'news/components/card.html' %}
         {% empty %}
           <p class="category-detail__empty">No any news in this category</p>
         {% endfor %}

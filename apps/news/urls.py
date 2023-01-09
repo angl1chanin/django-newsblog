@@ -3,7 +3,8 @@ from django.urls import path
 from news.views import (
     HomeView, ProfileView, ProfileDetailView, CategoryListView,
     CategoryView, ArticleView, ArticleCreateView, AuthorsListView,
-    TagsView, fav_add, fav_list, fav_clear
+    TagsView, fav_add, fav_list, fav_clear,
+    upvote, downvote
 )
 
 app_name = 'news'
@@ -14,6 +15,8 @@ urlpatterns = [
     path('create/', ArticleCreateView.as_view(), name='create-article'),
     path('authors/', AuthorsListView.as_view(), name='authors-list'),
     path('tags/', TagsView.as_view(), name='tags-list'),
+    path('upvote/<int:pk>', upvote, name='upvote'),
+    path('downvote/<int:pk>', downvote, name='downvote'),
 
     path('favourites/', fav_list, name='favourites-list'),
     path('favourites-clear/', fav_clear, name='favourites-clear'),

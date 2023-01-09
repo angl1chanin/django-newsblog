@@ -20,8 +20,8 @@ class Article(models.Model):
     category = models.ForeignKey("Category", on_delete=models.PROTECT, null=True, verbose_name="Категория")
     tags = models.ManyToManyField("Tag", blank=True, verbose_name="Тэги")
     bookmarks = models.ManyToManyField(User, blank=True, related_name="bookmarks_user", verbose_name="В закладках")
-    upvotes = models.PositiveIntegerField(default=0, editable=False, verbose_name="Лайки")
-    downvotes = models.PositiveIntegerField(default=0, editable=False, verbose_name="Дизлайки")
+    upvotes = models.ManyToManyField(User, blank=True, related_name="upvotes_article", verbose_name="Понравилось")
+    downvotes = models.ManyToManyField(User, blank=True, related_name="downvotes_article", verbose_name="Не понравилось")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлено")
 
@@ -45,6 +45,12 @@ class Article(models.Model):
         if not self.slug:
             self.slug = slugify_title(self.title)
         super().save(*args, **kwargs)
+
+    def total_upvotes(self):
+        return self.upvotes.count()
+
+    def total_downvotes(self):
+        return self.downvotes.count()
 
 
 class Category(models.Model):

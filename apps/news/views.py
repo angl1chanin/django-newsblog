@@ -146,6 +146,34 @@ def fav_clear(request):
     if articles.exists():
         for article in articles:
             article.bookmarks.remove(request.user)
+    """
+    This condition checks if the user followed by click on button or not
+    If not, it won't contain HTTP_REFERER and HttpResponseRedirect wouldn't work
+    """
     if 'HTTP_REFERER' not in request.META:
         return redirect('news:home')
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def upvote(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    if article.upvotes.filter(pk=request.user.pk).exists():
+        article.upvotes.remove(request.user)
+    else:
+        if article.downvotes.filter(pk=request.user.pk).exists():
+            article.downvotes.remove(request.user)
+        article.upvotes.add(request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def downvote(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    if article.downvotes.filter(pk=request.user.pk).exists():
+        article.downvotes.remove(request.user)
+    else:
+        if article.upvotes.filter(pk=request.user.pk).exists():
+            article.upvotes.remove(request.user)
+        article.downvotes.add(request.user)
     return HttpResponseRedirect(request.META['HTTP_REFERER'])

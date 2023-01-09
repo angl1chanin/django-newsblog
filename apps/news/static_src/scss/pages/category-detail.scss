@@ -7,15 +7,17 @@
 @import '../layouts/manage';
 
 // Components
-@import '../components/card-solid';
-@import '../components/card-split';
+@import '../components/card';
 
 .category-detail {
+  padding: 4rem 0;
+
   &__list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, 29.5rem);
     grid-auto-rows: 1fr;
     gap: 4rem;
+    justify-content: center;
 
     position: relative;
   }

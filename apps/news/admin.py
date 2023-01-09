@@ -8,7 +8,7 @@ from news.forms import ArticleAdminForm
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'category', 'upvotes', 'downvotes', 'created_at')
+    list_display = ('id', 'title', 'category', 'created_at')
     list_display_links = ('id', 'title')
     fields = ('author', 'title', 'photo', 'get_photo', 'content', 'category', 'tags', 'upvotes', 'downvotes', 'slug', 'created_at', 'updated_at')
     readonly_fields = ('slug', 'upvotes', 'downvotes', 'created_at', 'updated_at', 'get_photo')

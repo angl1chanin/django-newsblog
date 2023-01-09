@@ -26,9 +26,9 @@
                 <p class="authors-cards__author-fullname">{{ user.first_name }} {{ user.last_name }}</p>
               </figcaption>
             </figure>
-            <p class="authors-cards__description">{{ user.bio }}</p>
+            <p class="authors-cards__description">{% if user.bio %}{{ user.bio }}{% else %}No description{% endif %}</p>
             <div class="authors-cards__stats">
-              <span>4.5</span>
+              <span><i class="fa-regular fa-star"></i> 4.5</span>
               <span>{{ user.article_set.count }} articles</span>
             </div>
           </a>

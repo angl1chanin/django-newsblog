@@ -31,7 +31,7 @@
               </li>
               <li>
                 <i class="fa-regular fa-heart"></i>
-                <span>{{ article.upvotes }}</span>
+                <span>{{ article.upvotes.count }}</span>
               </li>
             </ul>
           </figcaption>
@@ -79,8 +79,8 @@
           <li><a href="#!">Vk</a></li>
         </ul>
         <ul class="article__estimate">
-          <li><a href="#!" class="article__like"><i class="fa-regular fa-thumbs-down"></i></a></li>
-          <li><a href="#!" class="article__dislike"><i class="fa-regular fa-thumbs-down"></i></a></li>
+          <li><a href="{% url 'news:upvote' article.pk %}" class="article__like {% if request.user in article.upvotes.all %}active{% endif %}"><i class="fa-regular fa-thumbs-down"></i> {{ article.upvotes.count }}</a></li>
+          <li><a href="{% url 'news:downvote' article.pk %}" class="article__dislike {% if request.user in article.downvotes.all %}active{% endif %}"><i class="fa-regular fa-thumbs-down"></i> {{ article.downvotes.count }}</a></li>
         </ul>
       </footer>
 

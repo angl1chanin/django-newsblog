@@ -7,8 +7,10 @@
 .favourites {
   padding: 4rem 0;
 
-  &__btn-wrapper {
-    margin-bottom: 4rem;
+  &__container nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &__grid {
@@ -17,6 +19,7 @@
     grid-auto-rows: 1fr;
     gap: 4rem;
     justify-content: center;
+    padding-top: 3rem;
   }
 
   &__card {

@@ -10,12 +10,21 @@
 {% block body %}
   <section class="favourites">
     <div class="favourites__container container">
+      <nav>
+        <ul>
+          <li>
+            <h3 style="color: black; font-weight: 400;">Favourites</h3>
+          </li>
+          {% if articles.exists %}
+            <li>
+              <div class="favourites__btn-wrapper">
+                <a class="favourites__btn btn" href="{% url 'news:favourites-clear' %}">Clear all</a>
+              </div>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
 
-      {% if articles.exists %}
-        <div class="favourites__btn-wrapper">
-          <a class="favourites__btn btn" href="{% url 'news:favourites-clear' %}">Clear all</a>
-        </div>
-      {% endif %}
 
       <div class="favourites__grid">
         {% for article in articles %}
